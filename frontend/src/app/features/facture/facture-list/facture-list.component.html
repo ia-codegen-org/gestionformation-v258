@@ -1,0 +1,124 @@
+<div class="page-card">
+
+  <!-- ─── Stat card ────────────────────────────── -->
+  <div class="stat-card">
+    <div class="stat-icon">
+      <mat-icon>dataset</mat-icon>
+    </div>
+    <div class="stat-info">
+      <span class="stat-count">{{ totalCount }}</span>
+      <span class="stat-label">Total Factures</span>
+    </div>
+  </div>
+
+  <!-- ─── Stats Statut ─────────────────── -->
+  <div class="enum-stats-section" *ngIf="enumStatsStatut.length > 0">
+    <div class="enum-stats-header">
+      <mat-icon>pie_chart</mat-icon>
+      <span class="enum-stats-title">Répartition par statut</span>
+      <span class="enum-stats-total">{{ totalCount }} total</span>
+    </div>
+    <div class="enum-cards-grid">
+      <div class="enum-val-card"
+           *ngFor="let stat of enumStatsStatut"
+           [style.border-color]="stat.color"
+           [style.background]="stat.bg">
+        <div class="enum-val-header">
+          <span class="enum-val-dot" [style.background]="stat.color"></span>
+          <span class="enum-val-label" [style.color]="stat.color">{{ stat.label }}</span>
+        </div>
+        <div class="enum-val-count" [style.color]="stat.color">{{ stat.count }}</div>
+        <div class="enum-val-percent">{{ stat.percent }}%</div>
+        <div class="enum-val-bar-bg">
+          <div class="enum-val-bar-fill"
+               [style.width.%]="stat.percent"
+               [style.background]="stat.color">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <h2 class="page-title">Liste des Factures</h2>
+    <button class="btn-add" *ngIf="canCreate" (click)="onCreate()">
+      <mat-icon>add</mat-icon>
+      Ajouter
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <div class="mat-table-container" *ngIf="!isLoading">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+
+ <ng-container matColumnDef="numero">
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+ <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+ </ng-container>
+
+ <ng-container matColumnDef="date">
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+ <td mat-cell *matCellDef="let row">{{ row.date | date:'dd/MM/yyyy' }}</td>
+ </ng-container>
+
+ <ng-container matColumnDef="montantTotal">
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant Total</th>
+ <td mat-cell *matCellDef="let row">{{ row.montantTotal }}</td>
+ </ng-container>
+
+ <ng-container matColumnDef="statut">
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut</th>
+ <td mat-cell *matCellDef="let row">
+ <span class="status-tag" [ngClass]="getEnumClass(row.statut)">{{ row.statut }}</span>
+ </td>
+ </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button
+                  (click)="onView(row.id); $event.stopPropagation()"
+                  title="Consulter" style="color: #8A92A6;">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="canEdit(row)"
+                  (click)="onEdit(row.id); $event.stopPropagation()"
+                  title="Modifier" style="color: #0D6EFD;">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="canDelete"
+                  (click)="onDelete(row.id); $event.stopPropagation()"
+                  title="Supprimer" style="color: #dc3545;">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td [colSpan]="displayedColumns.length" class="empty-state">
+          <mat-icon style="font-size: 36px; color: #E2E8F0;">inbox</mat-icon>
+          <p>Aucun Facture trouvé</p>
+        </td>
+      </tr>
+
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]"
+                   pageSize="10" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+
+</div>

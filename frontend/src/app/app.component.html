@@ -1,0 +1,146 @@
+<!-- ─── Layout principal ──────────────────────── -->
+<div style="display: flex; height: 100vh; overflow: hidden;">
+
+  <!-- ─── Sidebar ─────────────────────────────── -->
+  <div class="app-sidebar"
+       [class.collapsed]="!sidenavOpen()"
+       *ngIf="!isAuthPage">
+
+    <div class="sidebar-header">
+      <div class="sidebar-logo-badge" [style.background]="domainColor">
+        <mat-icon>{{ domainIcon }}</mat-icon>
+      </div>
+      <span class="sidebar-logo-text" *ngIf="sidenavOpen()">{{ projectDisplayName }}</span>
+      <button mat-icon-button
+              class="sidebar-close-btn"
+              (click)="toggleSidenav()"
+              *ngIf="sidenavOpen()"
+              title="Fermer">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <mat-nav-list>
+
+      <a class="sidebar-item"
+         routerLink="/dashboard"
+         routerLinkActive="active"
+         [matTooltip]="!sidenavOpen() ? 'Tableau de bord' : ''"
+         matTooltipPosition="right">
+        <mat-icon>dashboard</mat-icon>
+        <span *ngIf="sidenavOpen()">Tableau de bord</span>
+      </a>
+
+      <a class="sidebar-item"
+         *ngFor="let link of visibleNavLinks"
+         [routerLink]="link.path"
+         routerLinkActive="active"
+         [matTooltip]="!sidenavOpen() ? link.label : ''"
+         matTooltipPosition="right">
+        <mat-icon>{{ link.icon }}</mat-icon>
+        <span *ngIf="sidenavOpen()">{{ link.label }}</span>
+      </a>
+
+      <!-- ─── Utilisateurs : dropdown si ouvert, icônes directes si replié ─ -->
+      <ng-container *ngIf="hasVisibleActors">
+        <button type="button"
+                class="sidebar-item sidebar-item--dropdown"
+                [class.active]="usersMenuOpen()"
+                (click)="toggleUsersMenu()"
+                *ngIf="sidenavOpen()">
+          <mat-icon>people</mat-icon>
+          <span>Utilisateurs</span>
+          <mat-icon class="dropdown-chevron"
+                    [class.dropdown-chevron--open]="usersMenuOpen()">
+            expand_more
+          </mat-icon>
+        </button>
+
+        <div class="sidebar-submenu" *ngIf="usersMenuOpen() && sidenavOpen()">
+          <a class="sidebar-item sidebar-item--sub"
+             *ngFor="let link of visibleActorLinks"
+             [routerLink]="link.path"
+             routerLinkActive="active">
+            <mat-icon>{{ link.icon }}</mat-icon>
+            <span>{{ link.label }}</span>
+          </a>
+        </div>
+
+        <ng-container *ngIf="!sidenavOpen()">
+          <a class="sidebar-item"
+             *ngFor="let link of visibleActorLinks"
+             [routerLink]="link.path"
+             routerLinkActive="active"
+             [matTooltip]="link.label"
+             matTooltipPosition="right">
+            <mat-icon>{{ link.icon }}</mat-icon>
+          </a>
+        </ng-container>
+
+      </ng-container>
+
+      <!-- ─── Gestion des permissions — ADMIN uniquement ─── -->
+      <a class="sidebar-item"
+         *ngIf="isAdmin"
+         routerLink="/admin/permissions"
+         routerLinkActive="active"
+         [matTooltip]="!sidenavOpen() ? 'Gestion des permissions' : ''"
+         matTooltipPosition="right">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span *ngIf="sidenavOpen()">Permissions</span>
+      </a>
+
+    </mat-nav-list>
+    <div class="sidebar-logout">
+      <a class="sidebar-item" role="button" tabindex="0" style="cursor: pointer;"
+         (click)="logout()" (keydown.enter)="logout()"
+         [matTooltip]="!sidenavOpen() ? 'Se déconnecter' : ''"
+         matTooltipPosition="right">
+        <mat-icon>logout</mat-icon>
+        <span *ngIf="sidenavOpen()">Se déconnecter</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── Overlay mobile — ferme sidebar au clic ─── -->
+  <div class="sidebar-overlay"
+       *ngIf="!isAuthPage && sidenavOpen()"
+       role="button"
+       tabindex="0"
+       aria-label="Fermer le menu"
+       (click)="toggleSidenav()"
+       (keydown.enter)="toggleSidenav()"
+       (keydown.escape)="toggleSidenav()">
+  </div>
+
+  <!-- ─── Colonne droite ──────────────────────── -->
+  <div style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+
+    <div class="app-navbar" *ngIf="!isAuthPage">
+      <button mat-icon-button (click)="toggleSidenav()" class="menu-btn">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">{{ title | titlecase }}</span>
+      <span style="flex: 1"></span>
+      <mat-icon style="color: white; margin-right: 16px;">notifications</mat-icon>
+      <a [routerLink]="['/profile']"
+         style="color: white; cursor: pointer;
+                display: flex; align-items: center;">
+        <mat-icon>account_circle</mat-icon>
+      </a>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto;"
+         [style.background]="isAuthPage ? '#f0f2f5' : '#F1F5F9'">
+      <div [style.padding]="isAuthPage ? '0' : '24px'">
+        <router-outlet />
+      </div>
+    </div>
+
+    <footer class="app-footer" *ngIf="!isAuthPage">
+      <span>&#169; 2026 GestionFormation. Tous droits réservés.</span>
+    </footer>
+
+  </div>
+
+</div>

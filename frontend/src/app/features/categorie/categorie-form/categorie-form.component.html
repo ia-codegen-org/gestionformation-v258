@@ -1,0 +1,61 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    <h2 class="modal-title">
+      {{ isReadOnly ? 'Consulter' : (isEditMode ? 'Modifier' : 'Ajouter') }} Categorie
+    </h2>
+    <button class="modal-close" (click)="onCancel()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="form-body">
+
+      <div class="form-field-full">
+        <label class="field-label" for="nom">Nom *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="nom"
+                 id="nom"
+                 placeholder="Insérer nom">
+          <mat-error *ngIf="isInvalid('nom')">{{ getErrorMessage('nom') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="description">Description *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <textarea matInput
+                    formControlName="description"
+                    id="description"
+                    placeholder="Description"
+                    rows="4"></textarea>
+          <mat-error *ngIf="isInvalid('description')">{{ getErrorMessage('description') }}</mat-error>
+        </mat-form-field>
+      </div>
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Annuler
+      </button>
+      <button type="submit"
+              class="btn-save"
+              *ngIf="!isReadOnly"
+              [disabled]="isLoading">
+        {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
+      </button>
+      <div *ngIf="isReadOnly" class="read-only-badge">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode consultation</span>
+      </div>
+    </div>
+
+  </form>
+
+</div>

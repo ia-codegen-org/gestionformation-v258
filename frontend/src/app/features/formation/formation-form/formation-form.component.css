@@ -1,0 +1,217 @@
+/* ─── Form Component ────────────────────────────── */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Modal ─────────────────────────────────────── */
+.modal-form {
+  background:    #FFFFFF;
+  overflow:      hidden;
+  border-radius: 0 !important;
+  width:         100%;
+}
+
+.modal-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         16px 20px;
+  border-bottom:   1px solid #E2E8F0;
+  position:        sticky;
+  top:             0;
+  background:      white;
+  z-index:         10;
+}
+
+.modal-title {
+  font-size:   17px;
+  font-weight: 700;
+  color:       #023773;
+  margin:      0;
+}
+
+.modal-close {
+  background:    transparent;
+  border:        none;
+  cursor:        pointer;
+  color:         #8A92A6;
+  display:       flex;
+  align-items:   center;
+  padding:       4px;
+  border-radius: 4px;
+  transition:    all 0.2s ease;
+  flex-shrink:   0;
+}
+
+.modal-close:hover { background: #f5f7fa; color: #023773; }
+
+.form-body {
+  padding:        16px 20px;
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+  max-height:     calc(90vh - 130px);
+  overflow-y:     auto;
+}
+
+.form-field-full {
+  display:        flex;
+  flex-direction: column;
+  gap:            6px;
+  width:          100%%;
+}
+
+.form-actions {
+  padding:        12px 20px 16px;
+  border-top:     1px solid #E2E8F0;
+  margin-top:     0 !important;
+  padding-top:    12px !important;
+  position:       sticky;
+  bottom:         0;
+  background:     white;
+  z-index:        10;
+}
+
+@media (max-width: 480px) {
+  .modal-header { padding: 12px 14px; }
+  .form-body    { padding: 12px 14px; }
+  .form-actions { padding: 10px 14px 14px; }
+  .modal-title  { font-size: 15px; }
+}
+/* ─── Label ──────────────────────────────────────── */
+.field-label {
+  font-size:     13px;
+  font-weight:   500;
+  color:         #374151;
+  margin-bottom: 4px;
+}
+
+/* ─── Badge lecture seule ───────────────────────── */
+.read-only-badge {
+  display:       flex;
+  align-items:   center;
+  gap:           6px;
+  color:         #6B7280;
+  font-size:     14px;
+  font-weight:   500;
+  padding:       8px 16px;
+  background:    #F3F4F6;
+  border-radius: 4px;
+  border:        1px solid #E2E8F0;
+}
+
+.read-only-badge mat-icon {
+  font-size: 18px;
+  width:     18px;
+  height:    18px;
+  color:     #9CA3AF;
+}
+
+/* ─── Override Material ──────────────────────────── */
+::ng-deep .mat-mdc-form-field-infix {
+  padding-top:    10px !important;
+  padding-bottom: 10px !important;
+  min-height:     48px !important;
+}
+
+::ng-deep .mdc-notched-outline__leading,
+::ng-deep .mdc-notched-outline__notch,
+::ng-deep .mdc-notched-outline__trailing {
+  border-color:  #E2E8F0 !important;
+  border-width:  1px !important;
+  border-radius: 4px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background: #FFFFFF !important;
+}
+
+::ng-deep .mdc-text-field--focused .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--focused .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #023773 !important;
+}
+
+::ng-deep .mat-mdc-input-element::placeholder {
+  color:     #9ca3af !important;
+  font-size: 13px !important;
+}
+
+::ng-deep .mat-mdc-select-placeholder {
+  color:     #9ca3af !important;
+  font-size: 13px !important;
+}
+
+/* ─── Actions ────────────────────────────────────── */
+.form-actions {
+  display:         flex;
+  gap:             12px;
+  justify-content: flex-end;
+  align-items:     center;
+  margin-top:      24px;
+  padding-top:     16px;
+  border-top:      1px solid #f3f4f6;
+  flex-wrap:       wrap;
+}
+
+/* ─── Bouton Annuler ─────────────────────────────── */
+.btn-cancel {
+  background:    #FFFFFF;
+  color:         #374151;
+  border:        1px solid #E2E8F0;
+  border-radius: 4px;
+  height:        42px;
+  padding:       0 28px;
+  font-size:     14px;
+  font-weight:   500;
+  cursor:        pointer;
+  transition:    all 0.2s ease;
+  font-family:   inherit;
+}
+
+.btn-cancel:hover { background: #f9fafb; border-color: #9ca3af; }
+
+/* ─── Bouton Enregistrer ─────────────────────────── */
+.btn-save {
+  background:    #023773;
+  color:         #FFFFFF;
+  border:        none;
+  border-radius: 4px;
+  height:        42px;
+  padding:       0 32px;
+  font-size:     14px;
+  font-weight:   500;
+  cursor:        pointer;
+  transition:    background 0.2s ease;
+  font-family:   inherit;
+}
+
+.btn-save:hover    { background: #0E4179; }
+.btn-save:disabled { background: #9ca3af; cursor: not-allowed; }
+
+/* ─── Loading ────────────────────────────────────── */
+.loading-container {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  padding:         48px 16px;
+  gap:             12px;
+  color:           #8A92A6;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .form-actions { justify-content: stretch; }
+  .btn-cancel, .btn-save {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-actions   { flex-direction: column-reverse; gap: 8px; }
+  .btn-cancel, .btn-save { width: 100%%; height: 44px; }
+}

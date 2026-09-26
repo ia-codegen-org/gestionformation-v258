@@ -1,0 +1,72 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <!-- ─── Logo / Titre ──────────────────────── -->
+    <div class="login-logo">
+      <div class="login-logo-icon">
+        <mat-icon>school</mat-icon>
+      </div>
+      <h1 class="login-title">GestionFormation</h1>
+      <p class="login-subtitle">Connectez-vous à votre compte</p>
+    </div>
+
+    <!-- ─── Formulaire ────────────────────────── -->
+    <form [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="login-form">
+
+      <!-- ─── Username -->
+      <div class="login-field">
+        <label class="login-label" for="username">Nom d'utilisateur</label>
+        <mat-form-field appearance="outline" class="login-input">
+          <input matInput
+                 id="username"
+                 formControlName="username"
+                 placeholder="Entrez votre nom d'utilisateur"
+                 autocomplete="username">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="isInvalid('username')">
+            Nom d'utilisateur requis
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- ─── Password -->
+      <div class="login-field">
+        <label class="login-label" for="password">Mot de passe</label>
+        <mat-form-field appearance="outline" class="login-input">
+          <input matInput
+                 id="password"
+                 formControlName="password"
+                 [type]="hidePassword ? 'password' : 'text'"
+                 placeholder="Entrez votre mot de passe"
+                 autocomplete="current-password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix type="button"
+                  (click)="hidePassword = !hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="isInvalid('password')">
+            Mot de passe requis (min. 6 caractères)
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+  <a routerLink="/forgot-password" class="forgot-link">
+    Mot de passe oublié ?
+  </a>
+
+      <!-- ─── Submit -->
+      <button type="submit"
+              class="login-btn"
+              [disabled]="isLoading">
+        <mat-spinner *ngIf="isLoading"
+                     diameter="20"
+                     style="margin-right: 8px;">
+        </mat-spinner>
+        <span>{{ isLoading ? 'Connexion...' : 'Se connecter' }}</span>
+      </button>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    <h2 class="modal-title">
+      {{ isReadOnly ? 'Consulter' : (isEditMode ? 'Modifier' : 'Ajouter') }} Certificat
+    </h2>
+    <button class="modal-close" (click)="onCancel()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="form-body">
+
+      <div class="form-field-full">
+        <label class="field-label" for="titre">Titre *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="titre"
+                 id="titre"
+                 placeholder="Insérer titre">
+          <mat-error *ngIf="isInvalid('titre')">{{ getErrorMessage('titre') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="dateObtention">Date Obtention *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput [matDatepicker]="pickerdateObtention"
+                 formControlName="dateObtention"
+                 id="dateObtention"
+                 placeholder="Insérer une date">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerdateObtention"></mat-datepicker-toggle>
+          <mat-datepicker #pickerdateObtention></mat-datepicker>
+          <mat-error *ngIf="isInvalid('dateObtention')">{{ getErrorMessage('dateObtention') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="mention">Mention *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="mention"
+                      id="mention"
+                      placeholder="Choisir mention">
+            <mat-option value="PASSABLE">Passable</mat-option>
+            <mat-option value="ASSEZ_BIEN">Assez bien</mat-option>
+            <mat-option value="BIEN">Bien</mat-option>
+            <mat-option value="TRES_BIEN">Tres bien</mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('mention')">{{ getErrorMessage('mention') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <!-- ✅ Champ etudiant auto-rempli si rôle = Etudiant -->
+      <div class="form-field-full"
+           *ngIf="!isAutoFilled_etudiant">
+        <label class="field-label" for="etudiantId">Etudiant *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="etudiantId"
+                      id="etudiantId"
+                      placeholder="Choisir etudiant">
+            <mat-option *ngFor="let item of etudiantList"
+                        [value]="item.id">
+              {{ item.nom }} {{ item.prenom }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('etudiantId')">{{ getErrorMessage('etudiantId') }}</mat-error>
+        </mat-form-field>
+      </div>
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Annuler
+      </button>
+      <button type="submit"
+              class="btn-save"
+              *ngIf="!isReadOnly"
+              [disabled]="isLoading">
+        {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
+      </button>
+      <div *ngIf="isReadOnly" class="read-only-badge">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode consultation</span>
+      </div>
+    </div>
+
+  </form>
+
+</div>

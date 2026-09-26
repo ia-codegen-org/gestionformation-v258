@@ -1,0 +1,204 @@
+/* ─── Form Component ────────────────────────────── */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Page pleine ────────────────────────────────── */
+.form-page {
+  background: #FFFFFF;
+  padding:    32px 40px;
+  min-height: 100%%;
+  width:      100%%;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  display:       flex;
+  align-items:   center;
+  gap:           6px;
+  font-size:     12px;
+  margin-bottom: 8px;
+  flex-wrap:     wrap;
+}
+
+.breadcrumb-link       { color: #6b7280; cursor: pointer; transition: color 0.2s; }
+.breadcrumb-link:hover { color: #023773; }
+.breadcrumb-sep        { color: #d1d5db; }
+.breadcrumb-current    { color: #023773; font-weight: 500; }
+
+.form-page-title {
+  font-size:     22px;
+  font-weight:   700;
+  color:         #023773;
+  margin-bottom: 28px;
+}
+
+.form-grid { display: flex; flex-direction: column; gap: 0; }
+
+.form-row {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   24px;
+  margin-bottom:         16px;
+}
+
+.form-col        { display: flex; flex-direction: column; gap: 6px; }
+.form-col--full  { grid-column: 1 / -1; }
+.form-field-full { width: 100%%; }
+
+@media (max-width: 1024px) {
+  .form-page { padding: 24px 28px; }
+}
+
+@media (max-width: 768px) {
+  .form-page {
+    padding:    16px 20px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap:                   0;
+  }
+  .form-page-title { font-size: 18px; margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+  .form-page       { padding: 12px 14px; }
+  .form-page-title { font-size: 16px; }
+}
+/* ─── Label ──────────────────────────────────────── */
+.field-label {
+  font-size:     13px;
+  font-weight:   500;
+  color:         #374151;
+  margin-bottom: 4px;
+}
+
+/* ─── Badge lecture seule ───────────────────────── */
+.read-only-badge {
+  display:       flex;
+  align-items:   center;
+  gap:           6px;
+  color:         #6B7280;
+  font-size:     14px;
+  font-weight:   500;
+  padding:       8px 16px;
+  background:    #F3F4F6;
+  border-radius: 4px;
+  border:        1px solid #E2E8F0;
+}
+
+.read-only-badge mat-icon {
+  font-size: 18px;
+  width:     18px;
+  height:    18px;
+  color:     #9CA3AF;
+}
+
+/* ─── Override Material ──────────────────────────── */
+::ng-deep .mat-mdc-form-field-infix {
+  padding-top:    10px !important;
+  padding-bottom: 10px !important;
+  min-height:     48px !important;
+}
+
+::ng-deep .mdc-notched-outline__leading,
+::ng-deep .mdc-notched-outline__notch,
+::ng-deep .mdc-notched-outline__trailing {
+  border-color:  #E2E8F0 !important;
+  border-width:  1px !important;
+  border-radius: 4px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background: #FFFFFF !important;
+}
+
+::ng-deep .mdc-text-field--focused .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--focused .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #023773 !important;
+}
+
+::ng-deep .mat-mdc-input-element::placeholder {
+  color:     #9ca3af !important;
+  font-size: 13px !important;
+}
+
+::ng-deep .mat-mdc-select-placeholder {
+  color:     #9ca3af !important;
+  font-size: 13px !important;
+}
+
+/* ─── Actions ────────────────────────────────────── */
+.form-actions {
+  display:         flex;
+  gap:             12px;
+  justify-content: flex-end;
+  align-items:     center;
+  margin-top:      24px;
+  padding-top:     16px;
+  border-top:      1px solid #f3f4f6;
+  flex-wrap:       wrap;
+}
+
+/* ─── Bouton Annuler ─────────────────────────────── */
+.btn-cancel {
+  background:    #FFFFFF;
+  color:         #374151;
+  border:        1px solid #E2E8F0;
+  border-radius: 4px;
+  height:        42px;
+  padding:       0 28px;
+  font-size:     14px;
+  font-weight:   500;
+  cursor:        pointer;
+  transition:    all 0.2s ease;
+  font-family:   inherit;
+}
+
+.btn-cancel:hover { background: #f9fafb; border-color: #9ca3af; }
+
+/* ─── Bouton Enregistrer ─────────────────────────── */
+.btn-save {
+  background:    #023773;
+  color:         #FFFFFF;
+  border:        none;
+  border-radius: 4px;
+  height:        42px;
+  padding:       0 32px;
+  font-size:     14px;
+  font-weight:   500;
+  cursor:        pointer;
+  transition:    background 0.2s ease;
+  font-family:   inherit;
+}
+
+.btn-save:hover    { background: #0E4179; }
+.btn-save:disabled { background: #9ca3af; cursor: not-allowed; }
+
+/* ─── Loading ────────────────────────────────────── */
+.loading-container {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  padding:         48px 16px;
+  gap:             12px;
+  color:           #8A92A6;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .form-actions { justify-content: stretch; }
+  .btn-cancel, .btn-save {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-actions   { flex-direction: column-reverse; gap: 8px; }
+  .btn-cancel, .btn-save { width: 100%%; height: 44px; }
+}

@@ -1,0 +1,48 @@
+<div class="profile-page">
+
+  <!-- ─── Infos de base ──────────────────── -->
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="profile-avatar"><mat-icon>person</mat-icon></div>
+      <div class="profile-info">
+        <h2 class="profile-name">{{ username || 'Utilisateur' }}</h2>
+        <span class="profile-role-badge">{{ role }}</span>
+        <span class="profile-email">{{ email }}</span>
+      </div>
+    </div>
+    <div class="profile-fields">
+      <div class="profile-field" *ngFor="let field of fields">
+        <span class="field-label">{{ field.label }}</span>
+        <span class="field-value">{{ field.value }}</span>
+      </div>
+    </div>
+    <div class="profile-actions" *ngIf="canEditProfile()">
+      <button mat-flat-button color="primary" (click)="editProfile()">
+        <mat-icon>edit</mat-icon>
+        Modifier mon profil
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── Stats calculées ────────────────── -->
+  <div class="actor-stats-section" *ngIf="actorStats.length > 0">
+    <h3 class="actor-stats-title">
+      <mat-icon>bar_chart</mat-icon>
+      Mes statistiques
+    </h3>
+    <div class="actor-stats-grid">
+      <div class="actor-stat-card"
+           *ngFor="let stat of actorStats"
+           [style.--sc]="stat.color">
+        <div class="actor-stat-icon">
+          <mat-icon>{{ stat.icon }}</mat-icon>
+        </div>
+        <div class="actor-stat-body">
+          <span class="actor-stat-count">{{ stat.count }}</span>
+          <span class="actor-stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,596 @@
+            /* ─── Icons Material ─────────────────────────────── */
+            @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+            /* ═══════════════════════════════════════════════════
+               Variables
+            ═══════════════════════════════════════════════════ */
+            :root {
+              --primary:          #023773;
+              --primary-medium:   #0E4179;
+              --primary-light:    #3D77B7;
+              --accent:           #04CDA8;
+              --accent-dark:      #03b393;
+              --active-item:      #0D6EFD;
+              --text-on-primary:  white;
+              --text-on-accent:   white;
+              --background:       #F1F5F9;
+              --surface:          #FFFFFF;
+              --border:           #E2E8F0;
+              --text-primary:     #023773;
+              --text-secondary:   #8A92A6;
+              --shadow:           rgba(2, 55, 115, 0.12);
+              --shadow-sidebar:   rgba(13, 41, 78, 0.20);
+              --font-family:      ui-sans-serif, system-ui, sans-serif,
+                                  "Apple Color Emoji", "Segoe UI Emoji",
+                                  "Segoe UI Symbol", "Noto Color Emoji";
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Reset
+            ═══════════════════════════════════════════════════ */
+            * {
+              box-sizing: border-box;
+              margin:     0;
+              padding:    0;
+            }
+
+            html, body {
+              height:      100%%;
+              font-family: var(--font-family);
+              font-weight: 300;
+              background:  var(--background);
+              color:       var(--text-primary);
+              line-height: 1.4;
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Typographie
+            ═══════════════════════════════════════════════════ */
+            h1 {
+              font-size:   32px;
+              font-weight: 700;
+              color:       var(--primary);
+              line-height: 1.2;
+            }
+
+            h2 {
+              font-size:   24px;
+              font-weight: 700;
+              color:       var(--primary);
+              line-height: 1.3;
+            }
+
+            h3 {
+              font-size:   20px;
+              font-weight: 300;
+              color:       var(--primary);
+              line-height: 28px;
+            }
+
+            h4 {
+              font-size:   16px;
+              font-weight: 500;
+              color:       var(--primary-medium);
+            }
+
+            p {
+              font-size:   14px;
+              font-weight: 300;
+              line-height: 1.6;
+              color:       var(--text-primary);
+            }
+
+            label {
+              font-size:   13px;
+              font-weight: 500;
+              color:       var(--text-primary);
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Navbar — Figma: #023773, h:99px, radius:8px
+            ═══════════════════════════════════════════════════ */
+            .app-navbar {
+              background:    #023773;
+              height:        99px;
+              padding:       0 24px;
+              display:       flex;
+              align-items:   center;
+              gap:           12px;
+              border-radius: 0 0 8px 8px;
+              box-shadow:    0 4px 12px rgba(2, 55, 115, 0.2);
+              position:      sticky;
+              top:           0;
+              z-index:       100;
+              flex-shrink:   0;
+            }
+
+            .navbar-title {
+              font-size:      20px;
+              font-weight:    700;
+              color:          white;
+              letter-spacing: 0.3px;
+              flex:           1;
+            }
+
+            .navbar-icon-btn {
+              color: white !important;
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Sidebar — Figma: #FFFFFF, w:252px
+               shadow: 0 8 30 #0D294E 20%
+            ═══════════════════════════════════════════════════ */
+            .app-sidebar {
+              width:          252px;
+              min-height:     calc(100vh - 99px);
+              background:     #FFFFFF;
+              box-shadow:     0 8px 30px var(--shadow-sidebar);
+              flex-shrink:    0;
+              display:        flex;
+              flex-direction: column;
+              padding:        16px 0 24px;
+            }
+
+            /* ─── Sidebar item — Figma: w:209px h:40px
+               padding: 8px 16px, radius: 4px ────────────────── */
+            .sidebar-item {
+              display:         flex;
+              align-items:     center;
+              gap:             8px;
+              width:           209px;
+              height:          40px;
+              padding:         8px 16px;
+              margin:          2px auto;
+              border-radius:   4px;
+              cursor:          pointer;
+              transition:      background 0.2s ease,
+                               color 0.2s ease;
+              color:           #374151;
+              font-size:       14px;
+              font-weight:     400;
+              text-decoration: none;
+            }
+
+            .sidebar-item mat-icon {
+              font-size:  20px;
+              width:      20px;
+              height:     20px;
+              color:      #8A92A6;
+              transition: color 0.2s ease;
+            }
+
+            /* ─── Hover ──────────────────────────────────────── */
+            .sidebar-item:hover {
+              background: rgba(13, 110, 253, 0.08);
+              color:      #0D6EFD;
+            }
+
+            .sidebar-item:hover mat-icon {
+              color: #0D6EFD;
+            }
+
+            /* ─── Actif — Figma: #0D6EFD, radius:4px ─────────── */
+            .sidebar-item.active {
+              background:  #0D6EFD !important;
+              color:       white !important;
+              font-weight: 500;
+            }
+
+            .sidebar-item.active mat-icon {
+              color: white !important;
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Layout principal
+            ═══════════════════════════════════════════════════ */
+            .main-layout {
+              display:    flex;
+              min-height: calc(100vh - 99px);
+            }
+
+            /* ─── Zone contenu — Figma: background #043771 ───── */
+            .content-zone {
+              flex:       1;
+              background: #043771;
+              overflow-y: auto;
+              padding:    24px;
+            }
+
+            /* ─── Card contenu — Figma: #F1F5F9
+               border: 1px #E2E8F0, shadow ──────────────────── */
+            .content-wrapper {
+              background:    #F1F5F9;
+              border:        1px solid #E2E8F0;
+              border-radius: 2px;
+              box-shadow:    0 8px 13px rgba(0, 0, 0, 0.07);
+              padding:       24px;
+              min-height:    calc(100vh - 147px);
+            }
+
+            /* ─── Page card — Figma: #FFFFFF, radius:4px ─────── */
+            .page-card {
+              background:    #FFFFFF;
+              border-radius: 4px;
+              box-shadow:    0 8px 13px rgba(0, 0, 0, 0.07);
+              padding:       24px;
+            }
+
+            /* ─── Page header ────────────────────────────────── */
+            .page-header {
+              display:         flex;
+              align-items:     center;
+              justify-content: space-between;
+              margin-bottom:   24px;
+            }
+
+            .page-title {
+              font-size:   22px;
+              font-weight: 700;
+              color:       var(--primary);
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Bouton Add — Figma: #023773, 144x38px, radius:4px
+            ═══════════════════════════════════════════════════ */
+            .btn-add {
+              background:      #023773;
+              color:           white;
+              width:           144px;
+              height:          38px;
+              border-radius:   4px;
+              border:          none;
+              font-family:     var(--font-family);
+              font-size:       14px;
+              font-weight:     500;
+              cursor:          pointer;
+              display:         inline-flex;
+              align-items:     center;
+              justify-content: center;
+              gap:             6px;
+              transition:      background 0.2s ease;
+            }
+
+            .btn-add:hover { background: #0E4179; }
+
+            /* ═══════════════════════════════════════════════════
+               Boutons custom — style TollXpress
+            ═══════════════════════════════════════════════════ */
+            .btn-accent {
+              background:      var(--accent);
+              color:           white;
+              font-family:     var(--font-family);
+              font-size:       18px;
+              font-weight:     400;
+              height:          52px;
+              padding:         12px 48px;
+              border-radius:   8px 8px 32px 8px;
+              border:          none;
+              cursor:          pointer;
+              display:         inline-flex;
+              align-items:     center;
+              justify-content: center;
+              line-height:     28px;
+              transition:      background 0.2s ease,
+                               transform  0.15s ease;
+            }
+
+            .btn-accent:hover  { background: var(--accent-dark); transform: translateY(-1px); }
+            .btn-accent:active { transform: translateY(0); }
+
+            .btn-primary {
+              background:      var(--primary);
+              color:           white;
+              font-family:     var(--font-family);
+              font-size:       18px;
+              font-weight:     400;
+              height:          52px;
+              padding:         12px 48px;
+              border-radius:   8px 8px 32px 8px;
+              border:          none;
+              cursor:          pointer;
+              display:         inline-flex;
+              align-items:     center;
+              justify-content: center;
+              line-height:     28px;
+              transition:      background 0.2s ease;
+            }
+
+            .btn-primary:hover { background: var(--primary-medium); }
+
+            .btn-outline {
+              background:      transparent;
+              color:           var(--accent);
+              font-family:     var(--font-family);
+              font-size:       18px;
+              font-weight:     400;
+              height:          52px;
+              padding:         12px 48px;
+              border-radius:   8px 8px 32px 8px;
+              border:          2px solid var(--accent);
+              cursor:          pointer;
+              display:         inline-flex;
+              align-items:     center;
+              justify-content: center;
+              line-height:     24px;
+              transition:      all 0.2s ease;
+            }
+
+            .btn-outline:hover { background: var(--accent); color: white; }
+
+            .btn-sm {
+              font-size: 14px !important;
+              height:    36px !important;
+              padding:   6px 24px !important;
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Override Angular Material
+            ═══════════════════════════════════════════════════ */
+            .mat-toolbar.mat-primary {
+              background-color: var(--primary) !important;
+              color:            white !important;
+            }
+
+            .mat-mdc-raised-button.mat-primary,
+            .mat-mdc-fab.mat-primary,
+            .mat-mdc-mini-fab.mat-primary {
+              background-color: var(--active-item) !important;
+              color:            white !important;
+              border-radius:    4px !important;
+              font-size:        14px !important;
+              font-weight:      500 !important;
+              height:           38px !important;
+              padding:          0 24px !important;
+            }
+
+            .mat-mdc-raised-button.mat-primary:hover {
+              background-color: #0b5ed7 !important;
+            }
+
+            .mat-mdc-outlined-button.mat-primary,
+            .mat-mdc-button.mat-primary {
+              color:         var(--active-item) !important;
+              border-color:  var(--active-item) !important;
+              border-radius: 4px !important;
+            }
+
+            /* ─── Form focus — Figma: border #E2E8F0 1.5px ───── */
+            .mat-mdc-form-field .mdc-notched-outline__leading,
+            .mat-mdc-form-field .mdc-notched-outline__notch,
+            .mat-mdc-form-field .mdc-notched-outline__trailing {
+              border-color: #E2E8F0 !important;
+              border-width: 1.5px !important;
+            }
+
+            .mat-mdc-form-field.mat-focused
+              .mdc-notched-outline__leading,
+            .mat-mdc-form-field.mat-focused
+              .mdc-notched-outline__notch,
+            .mat-mdc-form-field.mat-focused
+              .mdc-notched-outline__trailing {
+              border-color: var(--active-item) !important;
+              border-width: 1.5px !important;
+            }
+
+            /* ─── Checkbox ───────────────────────────────────── */
+            .mat-mdc-checkbox.mat-primary {
+              --mdc-checkbox-selected-icon-color:         var(--active-item);
+              --mdc-checkbox-selected-hover-icon-color:   #0b5ed7;
+              --mdc-checkbox-selected-focus-icon-color:   var(--active-item);
+              --mdc-checkbox-selected-pressed-icon-color: var(--active-item);
+              --mdc-checkbox-selected-checkmark-color:    white;
+            }
+
+            /* ─── Table — Figma: border #8A92A6 ──────────────── */
+            .mat-table-container {
+              overflow-x:    auto;
+              border:        1px solid #8A92A6;
+              border-radius: 4px;
+              background:    white;
+            }
+
+            table { width: 100%%; }
+
+            .mat-mdc-header-row {
+              background: white !important;
+            }
+
+            .mat-mdc-header-cell {
+              color:       #8A92A6 !important;
+              font-family: Roboto, sans-serif !important;
+              font-weight: 500 !important;
+              font-size:   13.83px !important;
+              height:      30px !important;
+              line-height: 24px !important;
+            }
+
+            .mat-mdc-cell {
+              font-family: Roboto, sans-serif;
+              font-weight: 500;
+              font-size:   13.83px;
+              color:       #8A92A6;
+              height:      30px;
+              line-height: 24px;
+            }
+
+            .mat-mdc-row:hover {
+              background: #f0f6ff !important;
+            }
+
+            /* ─── Paginator ──────────────────────────────────── */
+            .mat-mdc-paginator {
+              background:    white !important;
+              border-top:    1px solid var(--border);
+              border-radius: 0 0 4px 4px;
+            }
+
+            /* ─── Card Material ──────────────────────────────── */
+            .mat-mdc-card {
+              border-radius: 4px !important;
+              box-shadow:    0 8px 13px rgba(0,0,0,0.07) !important;
+            }
+
+            /* ─── Dialog Material — carré ────────────────────── */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 0 !important;
+}
+
+
+            /* ═══════════════════════════════════════════════════
+               Form — Figma: border 1.5px #E2E8F0, radius:4px
+            ═══════════════════════════════════════════════════ */
+            .form-container {
+              max-width:     633px;
+              margin:        0 auto;
+              padding:       32px;
+              background:    white;
+              border-radius: 4px;
+              box-shadow:    0 8px 13px rgba(0,0,0,0.07);
+            }
+
+            .form-title {
+              font-size:      20px;
+              font-weight:    700;
+              color:          var(--primary);
+              margin-bottom:  24px;
+              padding-bottom: 12px;
+              border-bottom:  2px solid var(--active-item);
+            }
+
+            .form-field-full { width: 100%%; }
+
+            .form-actions {
+              display:         flex;
+              gap:             12px;
+              justify-content: flex-end;
+              margin-top:      24px;
+              padding-top:     16px;
+              border-top:      1px solid var(--border);
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Login
+            ═══════════════════════════════════════════════════ */
+            .login-container {
+              display:         flex;
+              align-items:     center;
+              justify-content: center;
+              min-height:      100vh;
+              background:      linear-gradient(135deg,
+                                 var(--primary) 0%%,
+                                 var(--primary-light) 100%%);
+            }
+
+            .login-card {
+              width:         420px;
+              padding:       40px;
+              border-radius: 4px !important;
+              box-shadow:    0 8px 32px rgba(2, 55, 115, 0.3) !important;
+            }
+
+            .login-logo {
+              text-align:    center;
+              margin-bottom: 32px;
+            }
+
+            .login-logo h1 {
+              font-size:   26px;
+              font-weight: 700;
+              color:       var(--primary);
+            }
+
+            .login-logo p {
+              font-size:  13px;
+              color:      var(--text-secondary);
+              margin-top: 4px;
+            }
+
+            .login-btn {
+              width:         100%% !important;
+              background:    var(--active-item) !important;
+              color:         white !important;
+              border-radius: 4px !important;
+              font-size:     15px !important;
+              height:        44px !important;
+              font-weight:   500 !important;
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Snackbar
+            ═══════════════════════════════════════════════════ */
+            .snack-success .mdc-snackbar__surface { background: #2e7d32 !important; }
+            .snack-error   .mdc-snackbar__surface { background: #c62828 !important; }
+
+            /* ═══════════════════════════════════════════════════
+               Badges
+            ═══════════════════════════════════════════════════ */
+            .badge-accent {
+              background:    var(--accent);
+              color:         white;
+              padding:       3px 10px;
+              border-radius: 99px;
+              font-size:     12px;
+              font-weight:   600;
+            }
+
+            .badge-primary {
+              background:    var(--primary);
+              color:         white;
+              padding:       3px 10px;
+              border-radius: 99px;
+              font-size:     12px;
+              font-weight:   600;
+            }
+
+            .badge-active {
+              background:    var(--active-item);
+              color:         white;
+              padding:       3px 10px;
+              border-radius: 99px;
+              font-size:     12px;
+              font-weight:   600;
+            }
+
+            /* ═══════════════════════════════════════════════════
+               Utilitaires
+            ═══════════════════════════════════════════════════ */
+            .text-primary  { color: var(--primary)        !important; }
+            .text-accent   { color: var(--accent)         !important; }
+            .text-muted    { color: var(--text-secondary) !important; }
+            .bg-primary    { background: var(--primary)   !important; }
+            .bg-accent     { background: var(--accent)    !important; }
+            .mt-16         { margin-top:    16px; }
+            .mt-24         { margin-top:    24px; }
+            .mb-16         { margin-bottom: 16px; }
+            .mb-24         { margin-bottom: 24px; }
+            .w-full        { width: 100%%; }
+
+            /* ═══════════════════════════════════════════════════
+   Footer — Figma: #023773
+═══════════════════════════════════════════════════ */
+.app-footer {
+  background:      #023773;
+  color:           rgba(255,255,255,0.85);
+  height:          46px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       13px;
+  font-weight:     400;
+  flex-shrink:     0;
+}
+
+            /* ═══════════════════════════════════════════════════
+               Responsive
+            ═══════════════════════════════════════════════════ */
+            @media (max-width: 768px) {
+              .app-sidebar    { display: none; }
+              .content-zone   { padding: 12px; }
+              .form-container { padding: 20px; max-width: 100%%; }
+              .page-header    { flex-direction: column;
+                                align-items:    flex-start;
+                                gap:            12px; }
+              .btn-accent,
+              .btn-primary,
+              .btn-outline    { padding: 12px 24px; font-size: 16px; }
+            }

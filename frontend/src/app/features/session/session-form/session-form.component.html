@@ -1,0 +1,108 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    <h2 class="modal-title">
+      {{ isReadOnly ? 'Consulter' : (isEditMode ? 'Modifier' : 'Ajouter') }} Session
+    </h2>
+    <button class="modal-close" (click)="onCancel()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="form-body">
+
+      <div class="form-field-full">
+        <label class="field-label" for="dateDebut">Date Debut *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput [matDatepicker]="pickerdateDebut"
+                 formControlName="dateDebut"
+                 id="dateDebut"
+                 placeholder="Insérer une date">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerdateDebut"></mat-datepicker-toggle>
+          <mat-datepicker #pickerdateDebut></mat-datepicker>
+          <mat-error *ngIf="isInvalid('dateDebut')">{{ getErrorMessage('dateDebut') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="dateFin">Date Fin *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput [matDatepicker]="pickerdateFin"
+                 formControlName="dateFin"
+                 id="dateFin"
+                 placeholder="Insérer une date">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerdateFin"></mat-datepicker-toggle>
+          <mat-datepicker #pickerdateFin></mat-datepicker>
+          <mat-error *ngIf="isInvalid('dateFin')">{{ getErrorMessage('dateFin') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="formationId">Formation *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="formationId"
+                      id="formationId"
+                      placeholder="Choisir formation">
+            <mat-option *ngFor="let item of formationList"
+                        [value]="item.id">
+              {{ item.titre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('formationId')">{{ getErrorMessage('formationId') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <!-- ✅ Champ formateur auto-rempli si rôle = Formateur -->
+      <div class="form-field-full"
+           *ngIf="!isAutoFilled_formateur">
+        <label class="field-label" for="formateurId">Formateur *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="formateurId"
+                      id="formateurId"
+                      placeholder="Choisir formateur">
+            <mat-option *ngFor="let item of formateurList"
+                        [value]="item.id">
+              {{ item.nom }} {{ item.prenom }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('formateurId')">{{ getErrorMessage('formateurId') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="salleId">Salle *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="salleId"
+                      id="salleId"
+                      placeholder="Choisir salle">
+            <mat-option *ngFor="let item of salleList"
+                        [value]="item.id">
+              {{ item.numero }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('salleId')">{{ getErrorMessage('salleId') }}</mat-error>
+        </mat-form-field>
+      </div>
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Annuler
+      </button>
+      <button type="submit"
+              class="btn-save"
+              *ngIf="!isReadOnly"
+              [disabled]="isLoading">
+        {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
+      </button>
+      <div *ngIf="isReadOnly" class="read-only-badge">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode consultation</span>
+      </div>
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,308 @@
+/* ─── Conteneur page ────────────────────────────── */
+.page-card {
+  background:    #FFFFFF;
+  border-radius: 12px;
+  box-shadow:    0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+  padding:       24px;
+  display:       flex;
+  flex-direction: column;
+  gap:           20px;
+  border:        1px solid #F1F5F9;
+}
+@media (max-width: 768px) { .page-card { padding: 16px; } }
+@media (max-width: 480px) { .page-card { padding: 12px; border-radius: 8px; } }
+
+   /* ─── Stat card ──────────────────────────────────── */
+.stat-card {
+  display:         flex;
+  align-items:     center;
+  gap:             16px;
+  background:      linear-gradient(135deg, #023773, #1a56b0);
+  border-radius:   8px;
+  padding:         20px 24px;
+  margin-bottom:   24px;
+  color:           white;
+  box-shadow:      0 4px 12px rgba(2, 55, 115, 0.25);
+}
+
+.stat-icon {
+  width:           52px;
+  height:          52px;
+  border-radius:   12px;
+  background:      rgba(255,255,255,0.15);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  flex-shrink:     0;
+}
+
+.stat-icon mat-icon {
+  font-size: 28px;
+  width:     28px;
+  height:    28px;
+  color:     white;
+}
+
+.stat-info {
+  display:        flex;
+  flex-direction: column;
+  gap:            4px;
+}
+
+.stat-count {
+  font-size:   32px;
+  font-weight: 800;
+  line-height: 1;
+  color:       white;
+}
+
+.stat-label {
+  font-size:   13px;
+  font-weight: 500;
+  opacity:     0.8;
+  color:       white;
+}
+
+@media (max-width: 480px) {
+  .stat-card  { padding: 14px 16px; }
+  .stat-count { font-size: 26px; }
+}at-card-count  { font-size: 28px; }
+
+
+/* ─── Enum Stats Section ─────────────────────────── */
+.enum-stats-section {
+  background:     #FAFAFA;
+  border:         1px solid #F1F5F9;
+  border-radius:  12px;
+  padding:        18px 20px;
+  display:        flex;
+  flex-direction: column;
+  gap:            14px;
+}
+.enum-stats-header {
+  display:         flex;
+  align-items:     center;
+  gap:             8px;
+  flex-wrap:       wrap;
+}
+.enum-stats-header mat-icon {
+  color:     #8B5CF6;
+  font-size: 20px;
+  width:     20px;
+  height:    20px;
+}
+.enum-stats-title {
+  font-size:   15px;
+  font-weight: 700;
+  color:       #0D2137;
+  flex:        1;
+}
+.enum-stats-total {
+  font-size:     12px;
+  font-weight:   600;
+  color:         #64748B;
+  background:    white;
+  border:        1px solid #E2E8F0;
+  border-radius: 99px;
+  padding:       3px 12px;
+}
+
+/* ─── Enum Value Cards Grid ──────────────────────── */
+.enum-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap:     10px;
+}
+.enum-val-card {
+  border-radius:  12px;
+  padding:        14px 12px;
+  border:         2px solid transparent;
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+  transition:     transform 0.15s ease, box-shadow 0.15s ease;
+  cursor:         default;
+}
+.enum-val-card:hover {
+  transform:  translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+.enum-val-header {
+  display:     flex;
+  align-items: center;
+  gap:         6px;
+}
+.enum-val-dot {
+  width:         8px;
+  height:        8px;
+  border-radius: 50%%;
+  flex-shrink:   0;
+}
+.enum-val-label {
+  font-size:      11px;
+  font-weight:    700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space:    nowrap;
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+}
+.enum-val-count {
+  font-size:   32px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.enum-val-percent {
+  font-size:   12px;
+  color:       #64748B;
+  font-weight: 600;
+}
+.enum-val-bar-bg {
+  height:        6px;
+  background:    rgba(0,0,0,0.08);
+  border-radius: 99px;
+  overflow:      hidden;
+}
+.enum-val-bar-fill {
+  height:        100%%;
+  border-radius: 99px;
+  min-width:     4px;
+  transition:    width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (max-width: 480px) {
+  .enum-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .enum-val-count  { font-size: 24px; }
+}
+
+/* ─── Header ─────────────────────────────────────── */
+.page-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  flex-wrap:       wrap;
+  gap:             12px;
+}
+.page-title {
+  font-size:   20px;
+  font-weight: 700;
+  color:       #023773;
+  margin:      0;
+}
+@media (max-width: 480px) { .page-title { font-size: 17px; } }
+
+/* ─── Bouton Ajouter ─────────────────────────────── */
+.btn-add {
+  display:       flex;
+  align-items:   center;
+  gap:           6px;
+  background:    #023773;
+  color:         #FFFFFF;
+  border:        none;
+  border-radius: 8px;
+  height:        40px;
+  padding:       0 20px;
+  font-size:     14px;
+  font-weight:   500;
+  cursor:        pointer;
+  transition:    background 0.2s ease;
+  font-family:   inherit;
+  white-space:   nowrap;
+}
+.btn-add:hover { background: #0E4179; }
+@media (max-width: 480px) {
+  .btn-add     { width: 100%%; justify-content: center; }
+  .page-header { flex-direction: column; align-items: stretch; }
+}
+
+/* ─── Tableau ────────────────────────────────────── */
+.mat-table-container {
+  width:      100%%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border:        1px solid #F1F5F9;
+}
+table { width: 100%%; }
+
+th.mat-header-cell {
+  background:    #F8FAFC;
+  color:         #023773;
+  font-size:     13px;
+  font-weight:   700;
+  padding:       12px 16px !important;
+  white-space:   nowrap;
+  border-bottom: 2px solid #E2E8F0 !important;
+}
+td.mat-cell {
+  padding:       12px 16px !important;
+  font-size:     14px;
+  color:         #374151;
+  border-bottom: 1px solid #F8FAFC !important;
+  max-width:     200px;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+}
+@media (max-width: 768px) {
+  td.mat-cell        { padding: 10px 12px !important; font-size: 13px; }
+  th.mat-header-cell { padding: 10px 12px !important; font-size: 12px; }
+}
+tr.mat-row { transition: background 0.15s; cursor: pointer; }
+tr.mat-row:hover { background: #F8FAFC; }
+
+/* ─── Tags enum ──────────────────────────────────── */
+.status-tag {
+  display:        inline-flex;
+  align-items:    center;
+  padding:        4px 10px;
+  border-radius:  99px;
+  font-size:      12px;
+  font-weight:    600;
+  text-transform: capitalize;
+  white-space:    nowrap;
+}
+.tag-blue    { background: #DBEAFE; color: #1D4ED8; }
+.tag-green   { background: #D1FAE5; color: #047857; }
+.tag-orange  { background: #FED7AA; color: #C2410C; }
+.tag-purple  { background: #E9D5FF; color: #7E22CE; }
+.tag-red     { background: #FEE2E2; color: #DC2626; }
+.tag-teal    { background: #CCFBF1; color: #0F766E; }
+.tag-pink    { background: #FCE7F3; color: #BE185D; }
+.tag-indigo  { background: #E0E7FF; color: #4338CA; }
+.tag-default { background: #F1F5F9; color: #64748B; }
+
+/* ─── Loading ────────────────────────────────────── */
+.loading-container {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  padding:         48px 16px;
+  gap:             12px;
+  color:           #8A92A6;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Empty state ────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding:    48px 16px;
+  color:      #8A92A6;
+}
+
+/* ─── Paginator ──────────────────────────────────── */
+::ng-deep .mat-mdc-paginator {
+  background:  transparent !important;
+  border-top:  1px solid #F1F5F9;
+  margin-top:  8px;
+  font-size:   13px !important;
+}
+@media (max-width: 480px) {
+  ::ng-deep .mat-mdc-paginator-container {
+    flex-wrap: wrap; justify-content: center; gap: 8px;
+  }
+}

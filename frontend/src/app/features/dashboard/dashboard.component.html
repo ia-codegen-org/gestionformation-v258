@@ -1,0 +1,84 @@
+<div class="dashboard-page">
+
+  <div class="dash-header">
+    <div>
+      <h1 class="dash-title">Tableau de bord</h1>
+      <p class="dash-breadcrumb">
+        <span>Accueil</span><span class="sep">/</span>
+        <span class="current">Tableau de bord</span>
+      </p>
+    </div>
+    <div class="dash-greeting">
+      <span class="greeting-text">{{ getGreeting() }},</span>
+      <span class="username"> {{ username }}</span>
+      <span class="role-badge">{{ role }}</span>
+    </div>
+  </div>
+
+  <!-- ─── Stat Cards ─────────────────────────── -->
+  <div class="cards-grid" *ngIf="visibleCards.length > 0">
+    <div class="stat-card"
+         *ngFor="let card of visibleCards"
+         [style.--c]="card.color"
+         role="button" tabindex="0"
+         (click)="navigate(card.route)"
+         (keydown.enter)="navigate(card.route)">
+      <div class="card-top">
+        <div class="card-icon-wrap"><mat-icon>{{ card.icon }}</mat-icon></div>
+        <div class="card-meta">
+          <span class="card-label">{{ card.label }}</span>
+          <span class="total-text">Total</span>
+        </div>
+      </div>
+      <div class="total-count">{{ card.count }}</div>
+      <div class="card-substats" *ngIf="card.subStats.length > 0">
+        <div class="substat" *ngFor="let sub of card.subStats">
+          <span class="substat-dot" [style.background]="sub.color"></span>
+          <span class="substat-value" [style.color]="sub.color">{{ sub.value }}</span>
+          <span class="substat-label">{{ sub.label }}</span>
+        </div>
+      </div>
+      <div class="card-arrow"><mat-icon>arrow_forward</mat-icon></div>
+    </div>
+  </div>
+
+  <!-- ─── Enum Sections ───────────────────────── -->
+  <div *ngFor="let section of enumSections" class="enum-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <mat-icon>pie_chart</mat-icon>
+        {{ section.title }}
+      </h2>
+      <span class="section-total">{{ section.total }} au total</span>
+    </div>
+    <div class="enum-cards-grid">
+      <div class="enum-val-card"
+           *ngFor="let stat of section.stats"
+           [style.border-color]="stat.color"
+           [style.background]="stat.bg">
+        <div class="enum-val-header">
+          <span class="enum-val-dot" [style.background]="stat.color"></span>
+          <span class="enum-val-label" [style.color]="stat.color">{{ stat.label }}</span>
+        </div>
+        <div class="enum-val-count" [style.color]="stat.color">{{ stat.count }}</div>
+        <div class="enum-val-percent">{{ stat.percent }}%</div>
+        <div class="enum-val-bar-bg">
+          <div class="enum-val-bar-fill"
+               [style.width.%]="stat.percent"
+               [style.background]="stat.color"></div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-body">
+        <canvas [id]="'chart-' + section.chartId"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-dash" *ngIf="visibleCards.length === 0">
+    <mat-icon>dashboard</mat-icon>
+    <p>Aucune donnée accessible pour votre rôle.</p>
+  </div>
+
+</div>

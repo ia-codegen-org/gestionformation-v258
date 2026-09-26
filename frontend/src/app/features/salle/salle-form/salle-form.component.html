@@ -1,0 +1,84 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    <h2 class="modal-title">
+      {{ isReadOnly ? 'Consulter' : (isEditMode ? 'Modifier' : 'Ajouter') }} Salle
+    </h2>
+    <button class="modal-close" (click)="onCancel()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="form-body">
+
+      <div class="form-field-full">
+        <label class="field-label" for="numero">Numero *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="numero"
+                 id="numero"
+                 placeholder="Insérer numero">
+          <mat-error *ngIf="isInvalid('numero')">{{ getErrorMessage('numero') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="capaciteMax">Capacite Max *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput type="number"
+                 formControlName="capaciteMax"
+                 id="capaciteMax"
+                 placeholder="Insérer capacite max">
+          <mat-error *ngIf="isInvalid('capaciteMax')">{{ getErrorMessage('capaciteMax') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="equipement">Equipement *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="equipement"
+                 id="equipement"
+                 placeholder="Insérer equipement">
+          <mat-error *ngIf="isInvalid('equipement')">{{ getErrorMessage('equipement') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="batimentId">Batiment *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="batimentId"
+                      id="batimentId"
+                      placeholder="Choisir batiment">
+            <mat-option *ngFor="let item of batimentList"
+                        [value]="item.id">
+              {{ item.nom }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('batimentId')">{{ getErrorMessage('batimentId') }}</mat-error>
+        </mat-form-field>
+      </div>
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Annuler
+      </button>
+      <button type="submit"
+              class="btn-save"
+              *ngIf="!isReadOnly"
+              [disabled]="isLoading">
+        {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
+      </button>
+      <div *ngIf="isReadOnly" class="read-only-badge">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode consultation</span>
+      </div>
+    </div>
+
+  </form>
+
+</div>

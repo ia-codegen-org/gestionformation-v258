@@ -1,0 +1,100 @@
+<div class="page-card">
+
+  <div class="page-header">
+    <h2 class="page-title">Gestion des permissions</h2>
+  </div>
+  <p class="page-subtitle">Autorisez ou refusez, par rôle, l'accès à chaque action sur chaque entité.</p>
+
+  <div class="error-banner" *ngIf="error">{{ error }}</div>
+
+  <div class="loading-container" *ngIf="loading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement des permissions...</p>
+  </div>
+
+  <ng-container *ngIf="!loading">
+
+    <div class="role-tabs" *ngIf="roles.length > 0">
+      <button type="button"
+              *ngFor="let role of roles"
+              class="role-tab"
+              [class.role-tab--active]="role === activeRole"
+              (click)="selectRole(role)">
+        {{ role }}
+      </button>
+    </div>
+
+    <div class="mat-table-container" *ngIf="roles.length > 0">
+      <table class="permission-table">
+        <thead>
+          <tr>
+            <th class="entity-col">Entité</th>
+            <th>Voir</th>
+            <th>Créer</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+            <th *ngIf="hasReadScopeColumn">Portée</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of entitiesForActiveRole; let i = index; trackBy: trackByEntity">
+            <td class="entity-cell">
+              <span class="entity-icon-badge">
+                <mat-icon>{{ row.icon }}</mat-icon>
+              </span>
+              <span>{{ row.entityName }}</span>
+            </td>
+            <td>
+              <label class="switch" [for]="'switch-get-' + i" [attr.aria-label]="'Voir ' + row.entityName" *ngIf="row.get as g">
+                <input [id]="'switch-get-' + i" type="checkbox" [checked]="g.allowed" (change)="toggle(g, $event)">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </label>
+              <span class="no-action" *ngIf="!row.get">—</span>
+            </td>
+            <td>
+              <label class="switch" [for]="'switch-post-' + i" [attr.aria-label]="'Créer ' + row.entityName" *ngIf="row.post as p">
+                <input [id]="'switch-post-' + i" type="checkbox" [checked]="p.allowed" (change)="toggle(p, $event)">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </label>
+              <span class="no-action" *ngIf="!row.post">—</span>
+            </td>
+            <td>
+              <label class="switch" [for]="'switch-put-' + i" [attr.aria-label]="'Modifier ' + row.entityName" *ngIf="row.put as u">
+                <input [id]="'switch-put-' + i" type="checkbox" [checked]="u.allowed" (change)="toggle(u, $event)">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </label>
+              <span class="no-action" *ngIf="!row.put">—</span>
+            </td>
+            <td>
+              <label class="switch" [for]="'switch-del-' + i" [attr.aria-label]="'Supprimer ' + row.entityName" *ngIf="row.del as d">
+                <input [id]="'switch-del-' + i" type="checkbox" [checked]="d.allowed" (change)="toggle(d, $event)">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </label>
+              <span class="no-action" *ngIf="!row.del">—</span>
+            </td>
+            <td *ngIf="hasReadScopeColumn">
+              <span class="scope-badge"
+                    *ngIf="row.readScope"
+                    [class.scope-badge--own]="row.readScope === 'OWN'"
+                    [class.scope-badge--all]="row.readScope === 'ALL'">
+                {{ scopeLabel(row.readScope) }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="empty-state" *ngIf="permissions.length === 0">
+      <mat-icon style="font-size: 36px; color: #E2E8F0;">inbox</mat-icon>
+      <p>Aucune permission trouvée.</p>
+    </div>
+
+  </ng-container>
+
+  <p class="admin-note">
+    <mat-icon>verified_user</mat-icon>
+    Le rôle Admin dispose toujours d'un accès complet à toutes les ressources.
+  </p>
+
+</div>

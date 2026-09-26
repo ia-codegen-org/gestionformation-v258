@@ -1,0 +1,114 @@
+<div class="form-page">
+
+  <div class="breadcrumb">
+    <span class="breadcrumb-link" role="link" tabindex="0"
+          (click)="onCancel()" (keydown.enter)="onCancel()">Accueil</span>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-link" role="link" tabindex="0"
+          (click)="onCancel()" (keydown.enter)="onCancel()">Liste des Etudiants</span>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-current">
+      {{ isReadOnly ? 'Consulter Etudiant' : (isEditMode ? 'Modifier Etudiant' : 'Nouveau Etudiant') }}
+    </span>
+  </div>
+
+  <h2 class="form-page-title">
+    {{ isReadOnly ? 'Consulter Etudiant' : (isEditMode ? 'Modifier Etudiant' : 'Nouveau Etudiant') }}
+  </h2>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="form-body">
+
+    <div class="form-grid">
+    <div class="form-row">
+      <div class="form-col">
+        <label class="field-label" for="username">Nom d'utilisateur *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput formControlName="username"
+                 id="username"
+                 placeholder="Nom d'utilisateur">
+          <mat-error *ngIf="isInvalid('username')">{{ getErrorMessage('username') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-col">
+        <label class="field-label" for="email">Email *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput type="email" formControlName="email"
+                 id="email"
+                 placeholder="Adresse email">
+          <mat-error *ngIf="isInvalid('email')">{{ getErrorMessage('email') }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+      <div class="info-banner" *ngIf="!isEditMode">
+        <mat-icon>info</mat-icon>
+        <span>Un mot de passe sera généré automatiquement et envoyé par email à l'adresse indiquée.</span>
+      </div>
+
+    <div class="form-row">
+      <div class="form-col">
+        <label class="field-label" for="nom">Nom *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="nom"
+                 id="nom"
+                 placeholder="Insérer nom">
+          <mat-error *ngIf="isInvalid('nom')">{{ getErrorMessage('nom') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-col">
+        <label class="field-label" for="prenom">Prenom *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="prenom"
+                 id="prenom"
+                 placeholder="Insérer prenom">
+          <mat-error *ngIf="isInvalid('prenom')">{{ getErrorMessage('prenom') }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-col form-col--full">
+        <label class="field-label" for="dateNaissance">Date Naissance *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput [matDatepicker]="pickerdateNaissance"
+                 formControlName="dateNaissance"
+                 id="dateNaissance"
+                 placeholder="Insérer une date">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerdateNaissance"></mat-datepicker-toggle>
+          <mat-datepicker #pickerdateNaissance></mat-datepicker>
+          <mat-error *ngIf="isInvalid('dateNaissance')">{{ getErrorMessage('dateNaissance') }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Annuler
+      </button>
+      <button type="submit"
+              class="btn-save"
+              *ngIf="!isReadOnly"
+              [disabled]="isLoading">
+        {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
+      </button>
+      <div *ngIf="isReadOnly" class="read-only-badge">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode consultation</span>
+      </div>
+    </div>
+
+  </form>
+
+</div>

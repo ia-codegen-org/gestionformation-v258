@@ -1,0 +1,29 @@
+<div class="assign-dialog">
+
+  <div class="assign-header">
+    <mat-icon class="assign-icon">link</mat-icon>
+    <h2 class="assign-title">{{ data.title }}</h2>
+  </div>
+
+  <div class="assign-body">
+    <mat-form-field appearance="outline" class="assign-select">
+      <mat-label>Sélectionner</mat-label>
+      <mat-select [(ngModel)]="selectedId">
+        <mat-option *ngFor="let item of data.items" [value]="item.id">
+          {{ item[data.displayField] ?? item.nom ?? item.username ?? item.titre ?? item.id }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="assign-actions">
+    <button type="button" class="btn-cancel" (click)="cancel()">Annuler</button>
+    <button type="button" class="btn-assign"
+            [disabled]="!selectedId"
+            (click)="confirm()">
+      <mat-icon>link</mat-icon>
+      Assigner
+    </button>
+  </div>
+
+</div>

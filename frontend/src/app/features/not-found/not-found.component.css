@@ -1,0 +1,16 @@
+.not-found {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  height:          80vh;
+  gap:             16px;
+}
+.not-found-icon {
+  font-size: 80px;
+  width:     80px;
+  height:    80px;
+  color:     #E2E8F0;
+}
+h1 { font-size: 72px; font-weight: 700; color: #CBD5E1; margin: 0; }
+p  { font-size: 18px; color: #94A3B8; }

@@ -1,0 +1,261 @@
+.page-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #F1F5F9;
+}
+@media (max-width: 768px) { .page-card { padding: 16px; } }
+@media (max-width: 480px) { .page-card { padding: 12px; border-radius: 8px; } }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #023773;
+  margin: 0;
+}
+@media (max-width: 480px) { .page-title { font-size: 17px; } }
+
+.page-subtitle {
+  margin: -12px 0 0;
+  color: #8A92A6;
+  font-size: 13px;
+}
+
+.error-banner {
+  background: #FEE2E2;
+  color: #B91C1C;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  gap: 12px;
+  color: #8A92A6;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.role-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #E2E8F0;
+  flex-wrap: wrap;
+}
+
+.role-tab {
+  padding: 10px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8A92A6;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.role-tab:hover {
+  color: #023773;
+}
+
+.role-tab--active {
+  color: #023773;
+  border-color: #023773;
+  font-weight: 700;
+}
+
+.mat-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border: 1px solid #F1F5F9;
+}
+
+.permission-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.permission-table th,
+.permission-table td {
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #F8FAFC;
+}
+
+.permission-table tr:last-child td {
+  border-bottom: none;
+}
+
+.permission-table th {
+  background: #F8FAFC;
+  color: #023773;
+  font-weight: 700;
+  font-size: 13px;
+  border-bottom: 2px solid #E2E8F0;
+  white-space: nowrap;
+}
+
+.entity-col,
+.entity-cell {
+  text-align: left;
+}
+
+.entity-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.entity-icon-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #023773;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.entity-icon-badge mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.no-action {
+  color: #E2E8F0;
+  font-size: 14px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.switch input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.switch-track {
+  position: absolute;
+  inset: 0;
+  background: #E2E8F0;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease;
+}
+
+.switch input:checked ~ .switch-track {
+  background: #023773;
+}
+
+.switch input:checked ~ .switch-track .switch-thumb {
+  transform: translateX(18px);
+}
+
+.switch input:focus-visible ~ .switch-track {
+  outline: 2px solid #023773;
+  outline-offset: 2px;
+}
+
+.scope-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.scope-badge--own {
+  background: #FED7AA;
+  color: #C2410C;
+}
+
+.scope-badge--all {
+  background: #D1FAE5;
+  color: #047857;
+}
+
+@media (max-width: 768px) {
+  .permission-table th,
+  .permission-table td { padding: 10px 12px; font-size: 13px; }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 48px 16px;
+  color: #8A92A6;
+}
+
+.admin-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  border-radius: 8px;
+  color: #8A92A6;
+  font-size: 12px;
+}
+
+.admin-note mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,85 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    <h2 class="modal-title">
+      {{ isReadOnly ? 'Consulter' : (isEditMode ? 'Modifier' : 'Ajouter') }} Formation
+    </h2>
+    <button class="modal-close" (click)="onCancel()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-icon style="animation: spin 1s linear infinite; color: #023773;">sync</mat-icon>
+    <p>Chargement...</p>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="form-body">
+
+      <div class="form-field-full">
+        <label class="field-label" for="titre">Titre *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput
+                 formControlName="titre"
+                 id="titre"
+                 placeholder="Insérer titre">
+          <mat-error *ngIf="isInvalid('titre')">{{ getErrorMessage('titre') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="description">Description *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <textarea matInput
+                    formControlName="description"
+                    id="description"
+                    placeholder="Description"
+                    rows="4"></textarea>
+          <mat-error *ngIf="isInvalid('description')">{{ getErrorMessage('description') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="dureeHeures">Duree Heures *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <input matInput type="number"
+                 formControlName="dureeHeures"
+                 id="dureeHeures"
+                 placeholder="Insérer duree heures">
+          <mat-error *ngIf="isInvalid('dureeHeures')">{{ getErrorMessage('dureeHeures') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-full">
+        <label class="field-label" for="categorieId">Categorie *</label>
+        <mat-form-field class="form-field-full" appearance="outline">
+          <mat-select formControlName="categorieId"
+                      id="categorieId"
+                      placeholder="Choisir categorie">
+            <mat-option *ngFor="let item of categorieList"
+                        [value]="item.id">
+              {{ item.nom }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('categorieId')">{{ getErrorMessage('categorieId') }}</mat-error>
+        </mat-form-field>
+      </div>
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Annuler
+      </button>
+      <button type="submit"
+              class="btn-save"
+              *ngIf="!isReadOnly"
+              [disabled]="isLoading">
+        {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
+      </button>
+      <div *ngIf="isReadOnly" class="read-only-badge">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode consultation</span>
+      </div>
+    </div>
+
+  </form>
+
+</div>
